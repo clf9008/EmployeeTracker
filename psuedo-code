@@ -9,4 +9,23 @@ salaries of all the employees in that department.)
 
 Build:
 -npm i of packages as well as a packages.json
--
+    - inquirer -console.table -MYSQL
+
+-Funtions needed:
+    -Start Prompt
+    -View All employees
+    -View All roles
+    -View All Employees by departments
+    -Selcet Role
+    -Select manager
+    -Add Employee
+    -Update Employee
+    -Add Employee Role
+    -Add department
+
+-Tables Required:
+    -Department Table
+    -Employee Role Table  
+    -Employee Seeds Table
+
+
