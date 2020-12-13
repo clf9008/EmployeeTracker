@@ -1,0 +1,12 @@
+Applications to be used: -node, java, inquirer, MYSQL, Workbench
+
+functionality: build a command line application that allows the user
+to add/view departments, roles, employees, and to update and employee
+role. In addition, if the application can update employee managers, 
+view employees by manager, delete departments, roles, and employees,
+and view the total utilized budget of a department (ie: the combined
+salaries of all the employees in that department.)
+
+Build:
+-npm i of packages as well as a packages.json
+-
