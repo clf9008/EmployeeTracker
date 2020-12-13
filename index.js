@@ -18,4 +18,29 @@ connection.connect(err => {
     startPrompt();
 });
 
-//
+//Prompt that will display upon running application 
+function startPrompt() {
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "What would you like to do?",
+            choices: [
+                "View All Employees?", 
+                "View All Employee's By Roles?",
+                "View all Emplyees By Deparments", 
+                "Update Employee",
+                "Add Employee?",
+                "Add Role?",
+                "Add Department?"
+            ]
+      }
+    ]).then(function(val) {
+        switch (val.choice) {
+            case "View All Employees?":
+                viewAllEmployees();
+            break;
+
+            
+        }
+    })
+}
