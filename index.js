@@ -19,7 +19,7 @@ connection.connect(err => {
 });
 
 //Prompt that will display upon running application 
-const promptUser = () => {
+const startPrompt = () => {
     inquirer.prompt ([
       {
         type: 'list',
@@ -41,72 +41,75 @@ const promptUser = () => {
                   'No Action']
       }
     ])
-      .then((answers) => {
-        const { choices } = answers; 
-  
+      .then((answers) => { const { choices } = answers; 
         if (choices === "View all departments") {
           showDepartments();
         }
-  
         if (choices === "View all roles") {
           showRoles();
         }
-  
         if (choices === "View all employees") {
           showEmployees();
         }
-  
         if (choices === "Add a department") {
           addDepartment();
         }
-  
         if (choices === "Add a role") {
           addRole();
         }
-  
         if (choices === "Add an employee") {
           addEmployee();
         }
-  
         if (choices === "Update an employee role") {
           updateEmployee();
         }
-  
         if (choices === "Update an employee manager") {
           updateManager();
         }
-  
         if (choices === "View employees by department") {
           employeeDepartment();
         }
-  
         if (choices === "Delete a department") {
           deleteDepartment();
         }
-  
         if (choices === "Delete a role") {
           deleteRole();
         }
-  
         if (choices === "Delete an employee") {
           deleteEmployee();
         }
-  
         if (choices === "View department budgets") {
           viewBudget();
         }
-  
         if (choices === "No Action") {
           connection.end()
       };
     });
   };
-//View All Employees function
-function viewAllEmployees() {
-    connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;", 
-    function(err, res) {
-      if (err) throw err
-      console.table(res)
-      startPrompt()
-  })
-}
+//Function to show all departments 
+showDepartments = () => {
+    console.log('Showing all departments...\n');
+    const sql = `SELECT department.id AS id, department.name AS department FROM department`; 
+  
+    connection.promise().query(sql, (err, rows) => {
+      if (err) throw err;
+      console.table(rows);
+      promptUser();
+    });
+  };
+  //Function to show all roles 
+showRoles = () => {
+    console.log('Showing all roles...\n');
+  
+    const sql = `SELECT role.id, role.title, department.name AS department
+                 FROM role
+                 INNER JOIN department ON role.department_id = department.id`;
+    
+    connection.promise().query(sql, (err, rows) => {
+      if (err) throw err; 
+      console.table(rows); 
+      promptUser();
+    })
+  };
+  
+  
