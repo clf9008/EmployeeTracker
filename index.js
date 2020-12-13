@@ -11,3 +11,11 @@ const connection = mysql.createConnection({
     password: "password",
     database: "employee_trackerDB"
   });
+//connection ID
+connection.connect(err => {
+    if (err) throw err;
+    console.log('MYSQL connected ' + connection.threadId);
+    startPrompt();
+});
+
+//
