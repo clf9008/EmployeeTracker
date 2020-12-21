@@ -57,7 +57,7 @@ function start() {
     })
     }
 
-    function viewDepartments() {
+function viewDepartments() {
         var query = "SELECT * FROM department";
           connection.query(query, function(err, res) {
               console.log(`DEPARTMENTS:`)
@@ -68,3 +68,24 @@ function start() {
             });
         };
 
+function viewRoles() {
+    var query = "SELECT * FROM role";
+        connection.query(query, function(err, res) {
+            console.log(`ROLES:`)
+            res.forEach(role => {
+                console.log(`ID: ${role.id} | Title: ${role.title} | Salary: ${role.salary} | Department ID: ${role.department_id}`);
+            })
+                start();
+            });
+        };
+function viewRoles() {
+    var query = "SELECT * FROM role";
+        connection.query(query, function(err, res) {
+        console.log(`ROLES:`)
+        res.forEach(role => {
+        console.log(`ID: ${role.id} | Title: ${role.title} | Salary: ${role.salary} | Department ID: ${role.department_id}`);
+        })
+        
+        start();
+        });
+    };
