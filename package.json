@@ -1,25 +1,17 @@
 {
-  "name": "employeetracker",
+  "name": "etracker",
   "version": "1.0.0",
-  "description": "Employee Tracker Application",
+  "description": "Employee Tracker",
   "main": "index.js",
-  "dependencies": {
-    "console.table": "^0.10.0",
-    "express": "^4.17.1",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/clf9008/EmployeeTracker.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/clf9008/EmployeeTracker/issues"
-  },
-  "homepage": "https://github.com/clf9008/EmployeeTracker#readme"
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
 }
