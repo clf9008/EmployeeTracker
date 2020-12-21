@@ -99,3 +99,19 @@ function viewEmployees() {
             start();
         });
     };
+function addDepartment() {
+    inquirer
+        .prompt({
+            name: "department",
+            type: "input",
+            message: "What is the name of the new department?",
+            })
+            .then(function(answer) {
+                var query = "INSERT INTO department (name) VALUES ( ? )";
+                connection.query(query, answer.department, function(err, res) {
+                console.log(`You have added this department: ${(answer.department).toUpperCase()}.`)
+        })
+        viewDepartments();
+    })
+}
+
