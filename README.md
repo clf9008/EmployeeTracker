@@ -23,9 +23,9 @@ You must create a database using MYSQL to run this application.
 6. Use your Git terminal to execute index.js. 
 
 #### Required Applications
-- [Visual Studio Code] [https://code.visualstudio.com/docs/setup/setup-overview]
-- Node (https://nodejs.org/en/download/)
+- [Visual Studio Code] (https://code.visualstudio.com/docs/setup/setup-overview)
+- [Node] (https://nodejs.org/en/download/)
   -inqiurer
   -mysql
   -console.table
-
+##### Application Preview
