@@ -265,7 +265,7 @@ async function removeEmployee() {
     prompt();
 
 };
-//function that displays employee by id
+//function that displays employee by id of name
 function askId() {
     return ([
         {
