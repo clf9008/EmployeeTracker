@@ -1,10 +1,11 @@
+//dependencies required for application
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 require('console.table');
 
 
-
-const promptMessages = {
+//Prompts available to user upon startup of application 
+const messagePrompts  = {
     viewAllEmployees: "View All Employees",
     viewByDepartment: "View All Employees By Department",
     viewByManager: "View All Employees By Manager",
@@ -15,7 +16,7 @@ const promptMessages = {
     viewAllRoles: "View All Roles",
     exit: "Exit"
 };
-
+//creating a connection yo MYSQL
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -23,12 +24,12 @@ const connection = mysql.createConnection({
     port: 3306,
     database: 'employee_db'
 });
-
+//if connection error, throw error otherwise start message prompt
 connection.connect(err => {
     if (err) throw err;
     prompt();
 });
-
+//prompt at startup 
 function prompt() {
     inquirer
         .prompt({
@@ -36,54 +37,55 @@ function prompt() {
             type: 'list',
             message: 'What would you like to do?',
             choices: [
-                promptMessages.viewAllEmployees,
-                promptMessages.viewByDepartment,
-                promptMessages.viewByManager,
-                promptMessages.viewAllRoles,
-                promptMessages.addEmployee,
-                promptMessages.removeEmployee,
-                promptMessages.updateRole,
-                promptMessages.exit
+                messagePrompts.viewAllEmployees,
+                messagePrompts.viewByDepartment,
+                messagePrompts.viewByManager,
+                messagePrompts.viewAllRoles,
+                messagePrompts.addEmployee,
+                messagePrompts.removeEmployee,
+                messagePrompts.updateRole,
+                messagePrompts.exit
             ]
         })
+        //then console log the answer and run action of the object messagePrompt
         .then(answer => {
             console.log('answer', answer);
             switch (answer.action) {
-                case promptMessages.viewAllEmployees:
+                case messagePrompts.viewAllEmployees:
                     viewAllEmployees();
                     break;
 
-                case promptMessages.viewByDepartment:
+                case messagePrompts.viewByDepartment:
                     viewByDepartment();
                     break;
 
-                case promptMessages.viewByManager:
+                case messagePrompts.viewByManager:
                     viewByManager();
                     break;
 
-                case promptMessages.addEmployee:
+                case messagePrompts.addEmployee:
                     addEmployee();
                     break;
 
-                case promptMessages.removeEmployee:
+                case messagePrompts.removeEmployee:
                     remove('delete');
                     break;
 
-                case promptMessages.updateRole:
+                case messagePrompts.updateRole:
                     remove('role');
                     break;
 
-                case promptMessages.viewAllRoles:
+                case messagePrompts.viewAllRoles:
                     viewAllRoles();
                     break;
 
-                case promptMessages.exit:
+                case messagePrompts.exit:
                     connection.end();
                     break;
             }
         });
 }
-
+//function to view all employees in the database
 function viewAllEmployees() {
     const query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
     FROM employee
@@ -100,7 +102,7 @@ function viewAllEmployees() {
         prompt();
     });
 }
-
+//function to view all departments in the database
 function viewByDepartment() {
     const query = `SELECT department.name AS department, role.title, employee.id, employee.first_name, employee.last_name
     FROM employee
@@ -116,8 +118,7 @@ function viewByDepartment() {
         prompt();
     });
 }
-
-
+//function to view employee by manager in the database
 function viewByManager() {
     const query = `SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager, department.name AS department, employee.id, employee.first_name, employee.last_name, role.title
     FROM employee
@@ -134,7 +135,7 @@ function viewByManager() {
         prompt();
     });
 }
-
+//function to view all roles in the database
 function viewAllRoles() {
     const query = `SELECT role.title, employee.id, employee.first_name, employee.last_name, department.name AS department
     FROM employee
@@ -151,7 +152,7 @@ function viewAllRoles() {
     });
 
 }
-
+//function to add employees to the database 
 async function addEmployee() {
     const addname = await inquirer.prompt(askName());
     connection.query('SELECT role.id, role.title FROM role ORDER BY role.id;', async (err, res) => {
@@ -218,6 +219,7 @@ async function addEmployee() {
     });
 
 }
+//function to remove prompt that displays upon running the removeEmployee function
 function remove(input) {
     const promptQ = {
         yes: "yes",
@@ -240,7 +242,7 @@ function remove(input) {
 
     });
 };
-
+//function to remove an employee from the database
 async function removeEmployee() {
 
     const answer = await inquirer.prompt([
@@ -263,7 +265,7 @@ async function removeEmployee() {
     prompt();
 
 };
-
+//function that displays employee by id
 function askId() {
     return ([
         {
@@ -273,8 +275,7 @@ function askId() {
         }
     ]);
 }
-
-
+//funciton to update role of an employee in the database 
 async function updateRole() {
     const employeeId = await inquirer.prompt(askId());
 
@@ -304,7 +305,7 @@ async function updateRole() {
         });
     });
 }
-
+//function that askes the input of name of the employee
 function askName() {
     return ([
         {
