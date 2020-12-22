@@ -29,3 +29,4 @@ You must create a database using MYSQL to run this application.
   -mysql
   -console.table
 ##### Application Preview
+![App Demo](https://github.com/clf9008/EmployeeTracker/blob/main/EmployeeTrackergif.gif?raw=true "Gif Demo")
